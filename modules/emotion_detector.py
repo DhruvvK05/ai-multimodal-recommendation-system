@@ -1,18 +1,21 @@
 from deepface import DeepFace
-import cv2
 
 def detect_emotion(frame):
 
-    frame = cv2.resize(frame, (480,360))
+    try:
 
-    result = DeepFace.analyze(
-        img_path=frame,
-        actions=['emotion'],
-        detector_backend="opencv",
-        enforce_detection=False
-    )
+        result = DeepFace.analyze(
+            frame,
+            actions=["emotion"],
+            enforce_detection=False
+        )
 
-    emotion = result[0]["dominant_emotion"]
-    score = result[0]["emotion"][emotion]
+        emotion = result[0]["dominant_emotion"]
 
-    return emotion.lower(), round(score,2)
+        score = round(result[0]["emotion"][emotion], 2)
+
+        return emotion, score
+
+    except:
+
+        return "neutral", 0
