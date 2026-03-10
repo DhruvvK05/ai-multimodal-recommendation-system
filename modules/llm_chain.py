@@ -1,24 +1,28 @@
 from langchain_ollama import ChatOllama
 
-# initialize LLM
-llm = ChatOllama(model="llama3")
+llm = ChatOllama(model="llama3", temperature=0.7)
 
-
-def get_ai_recommendation(emotion, weather, time_of_day, mood_goal, energy_level):
+def get_ai_recommendation(emotion, weather, city, time_of_day, mood_goal, energy_level):
 
     prompt = f"""
-User context:
+You are an AI lifestyle assistant.
 
+User Context:
 Emotion: {emotion}
 Weather: {weather}
-Time of Day: {time_of_day}
+City: {city}
+Time: {time_of_day}
 Goal: {mood_goal}
 Energy Level: {energy_level}/10
 
-Suggest:
-1 movie
-1 activity
-Explain briefly why it suits the user.
+Give recommendations in this format:
+
+Activity:
+Place to Visit in {city}:
+Suggestions:
+Reason:
+
+Keep it short and point-wise.
 """
 
     response = llm.invoke(prompt)

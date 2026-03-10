@@ -164,7 +164,7 @@ def get_city_weather():
     weather_label.config(text="Weather: " + weather)
 
 
-# ---------------- RECOMMEND ----------------
+
 
 def recommend_and_play():
 
